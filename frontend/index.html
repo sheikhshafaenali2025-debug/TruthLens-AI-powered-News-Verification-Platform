@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TruthLens — News Verification Desk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute">
+  <filter id="inkTexture">
+    <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" result="noise" seed="4"/>
+    <feDisplacementMap in="SourceGraphic" in2="noise" scale="3"/>
+  </filter>
+  <filter id="inkTexture2">
+    <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" result="noise" seed="9"/>
+    <feDisplacementMap in="SourceGraphic" in2="noise" scale="3"/>
+  </filter>
+</svg>
+
+<header class="nav">
+  <div class="nav-inner">
+    <div class="logo">
+      <span class="logo-mark">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.6"/>
+          <line x1="16.2" y1="16.2" x2="21" y2="21" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+      </span>
+      TruthLens
+    </div>
+    <nav class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#features">Method</a>
+      <a href="#desk">Verification desk</a>
+    </nav>
+    <div style="display:flex; align-items:center; gap:12px;">
+      <div class="server-status" id="serverStatus" title="Flask ML Backend Status">
+        <span class="status-dot"></span>
+        <span class="status-text" id="statusText">Connecting...</span>
+      </div>
+      <button class="mode-toggle" id="modeToggle" title="Toggle print / digital mode" aria-label="Toggle theme">☾</button>
+      <a href="#desk" class="nav-cta">Open desk</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-grid">
+    <div>
+      <div class="eyebrow">Case file no. 00483 — open investigation</div>
+      <h1>Every article<br>deserves a <em>second read.</em></h1>
+      <p class="lede">Paste any news text into the desk below. TruthLens cross-reads its language, sourcing, and structure, then returns a full case file — verdict, credibility, bias, and the claims worth checking.</p>
+      <div class="hero-actions">
+        <a href="#desk" class="btn-primary">Open the desk →</a>
+        <a href="#how" class="btn-ghost">See how it reads →</a>
+      </div>
+    </div>
+    <div class="stamp-wrap">
+      <svg class="stamp" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="100" cy="100" r="92" fill="none" stroke="#8b93a0" stroke-width="2.5"/>
+        <circle cx="100" cy="100" r="78" fill="none" stroke="#8b93a0" stroke-width="1"/>
+        <path id="ringPath" d="M 100,22 A 78,78 0 1 1 99,22" fill="none"/>
+        <text font-family="IBM Plex Mono, monospace" font-size="10.5" fill="#8b93a0" letter-spacing="3">
+          <textPath href="#ringPath" startOffset="2%">UNVERIFIED · PENDING REVIEW · TRUTHLENS DESK ·</textPath>
+        </text>
+        <text x="100" y="93" text-anchor="middle" font-family="Fraunces, serif" font-size="22" font-weight="600" fill="#8b93a0">CASE</text>
+        <text x="100" y="118" text-anchor="middle" font-family="Fraunces, serif" font-size="22" font-weight="600" fill="#8b93a0">OPEN</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat"><div class="num" id="statArticles">10,000+</div><div class="label">Articles read</div></div>
+    <div class="stat"><div class="num" id="statAccuracy">96%</div><div class="label" id="statModelName">Model accuracy</div></div>
+    <div class="stat"><div class="num" id="statSpeed">0.4s</div><div class="label">Avg. read time</div></div>
+    <div class="stat"><div class="num" id="statStatus">24/7</div><div class="label" id="statStatusLabel">Desk is open</div></div>
+  </div>
+</div>
+
+<section class="section" id="features">
+  <div class="section-head">
+    <div class="eyebrow">Method</div>
+    <h2>Six instruments, one reading.</h2>
+    <p>TruthLens doesn't just guess real or fake — it shows its working, the way a fact-checker would annotate a printed page.</p>
+  </div>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="fnum">01 / Model</div>
+      <h3>Language forensics</h3>
+      <p>Trained on verified and disputed articles, the model reads sentence structure, sourcing cues, and word choice.</p>
+    </div>
+    <div class="feature-card">
+      <div class="fnum">02 / Source</div>
+      <h3>Publisher credibility</h3>
+      <p>Cross-checks the named outlet, when given, against a table of known reliable and unreliable publishers.</p>
+    </div>
+    <div class="feature-card">
+      <div class="fnum">03 / Claims</div>
+      <h3>Claim extraction</h3>
+      <p>Pulls out the specific, checkable statements in the piece — the ones worth verifying independently.</p>
+    </div>
+    <div class="feature-card">
+      <div class="fnum">04 / Trail</div>
+      <h3>Standing case file</h3>
+      <p>Every reading, its keywords, and its verdict roll up into a running desk log for the session.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="how">
+  <div class="section-head">
+    <div class="eyebrow">Procedure</div>
+    <h2>What happens when you hit analyze.</h2>
+  </div>
+  <div class="process">
+    <div class="process-row">
+      <div class="pnum">01</div>
+      <div><h4>Text intake</h4><p>Your pasted article — and source, if given — is cleaned and broken into sentences and tokens.</p></div>
+    </div>
+    <div class="process-row">
+      <div class="pnum">02</div>
+      <div><h4>Feature extraction</h4><p>Keyword weight, sentence complexity, tone, and named claims are measured against the training set.</p></div>
+    </div>
+    <div class="process-row">
+      <div class="pnum">03</div>
+      <div><h4>Model scoring</h4><p>The classifier weighs each feature and produces a raw probability split between real and fake.</p></div>
+    </div>
+    <div class="process-row">
+      <div class="pnum">04</div>
+      <div><h4>Cross-checks</h4><p>Source credibility, bias signals, and comparable coverage from verified outlets are pulled in alongside the verdict.</p></div>
+    </div>
+    <div class="process-row">
+      <div class="pnum">05</div>
+      <div><h4>Case filed</h4><p>The full report is saved to your desk log, with room for you to agree, disagree, or flag it for review.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="detector-section" id="desk">
+  <div class="desk">
+    <div class="section-head">
+      <div class="eyebrow">Verification desk</div>
+      <h2>Bring an article to the desk.</h2>
+      <p>Paste the full text below, and name the source if you know it — the more the desk has to work with, the fuller the case file.</p>
+    </div>
+
+    <div class="desk-grid">
+      <div class="input-card">
+        <div class="card-label"><span>Article text</span><span id="wordCount">0 words</span></div>
+        <textarea id="article-input" placeholder="Paste a news article here — the more complete, the better the reading..."></textarea>
+        <div class="source-row">
+          <span class="src-icon">SOURCE</span>
+          <input type="text" id="sourceInput" placeholder="e.g. bbc.com, reuters.com — leave blank if unknown">
+        </div>
+        <div class="input-footer">
+          <div class="input-actions">
+            <button class="btn-secondary" id="uploadBtn">↑ Upload .txt</button>
+            <button class="btn-secondary" id="clearBtn">Clear</button>
+          </div>
+          <button class="btn-primary" id="analyzeBtn">Analyze article →</button>
+        </div>
+        <input type="file" id="fileInput" accept=".txt" style="display:none">
+
+        <div class="loading-panel" id="loadingPanel">
+          <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+          <div class="loading-line" id="line1"><span class="dot"></span> Reading submitted text…</div>
+          <div class="loading-line" id="line2"><span class="dot"></span> Extracting language features…</div>
+          <div class="loading-line" id="line3"><span class="dot"></span> Scoring against trained model…</div>
+          <div class="loading-line" id="line4"><span class="dot"></span> Checking source & cross-references…</div>
+          <div class="loading-line" id="line5"><span class="dot"></span> Drafting the case file…</div>
+        </div>
+      </div>
+
+      <div class="tips-card">
+        <div class="card-label">Reading the room</div>
+        <ul>
+          <li>Check the byline and outlet before the headline — the source is the first fact.</li>
+          <li>Read past the first paragraph; misleading pieces often front-load their strongest claim.</li>
+          <li>Look for named sources and dates, not just quotes in the abstract.</li>
+          <li>A claim with no citation is a claim, not a fact — even if it sounds precise.</li>
+          <li>Cross-check the same story on one outlet you don't usually read.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="results-panel" id="resultsPanel">
+      <div class="results-head">
+        <div>
+          <div class="card-label">Case file — filed <span id="filedTime"></span></div>
+          <h3 id="verdictHeadline">Analysis report</h3>
+        </div>
+        <div class="results-footer">
+          <button class="btn-secondary" id="downloadBtn">⇩ Download report</button>
+          <button class="btn-secondary" id="newAnalysisBtn">New analysis</button>
+        </div>
+      </div>
+
+      <div class="results-grid">
+        <div class="verdict-panel">
+          <svg class="verdict-stamp" id="verdictStamp" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="100" cy="100" r="90" fill="none" stroke-width="4"/>
+            <text id="verdictWord" x="100" y="94" text-anchor="middle" font-family="Fraunces, serif" font-size="26" font-weight="700"></text>
+            <text id="verdictSub" x="100" y="118" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" letter-spacing="2"></text>
+          </svg>
+          <div class="confidence-num" id="confidenceNum">—</div>
+          <div class="confidence-sub">authenticity score</div>
+          <div class="score-bar-track"><div class="score-bar-fill" id="scoreBarFill"></div></div>
+        </div>
+
+        <div class="metrics-panel">
+          <div class="metric-row">
+            <div class="metric"><div class="m-label">Risk level</div><div class="m-value" id="riskLevel">—</div></div>
+            <div class="metric"><div class="m-label">Sentiment</div><div class="m-value" id="sentiment">—</div></div>
+            <div class="metric"><div class="m-label">Language</div><div class="m-value" id="language">English</div></div>
+            <div class="metric"><div class="m-label">Read time</div><div class="m-value" id="procTime">—</div></div>
+          </div>
+
+          <div class="card-label">Probability split</div>
+          <div class="prob-bars">
+            <div class="prob-row">
+              <span class="p-label">Real</span>
+              <div class="prob-track"><div class="prob-fill real" id="realBar"></div></div>
+              <span class="p-value" id="realPct">0%</span>
+            </div>
+            <div class="prob-row">
+              <span class="p-label">Fake</span>
+              <div class="prob-track"><div class="prob-fill fake" id="fakeBar"></div></div>
+              <span class="p-value" id="fakePct">0%</span>
+            </div>
+          </div>
+
+          <div class="card-label">Flagged terms</div>
+          <div class="keywords" id="keywordChips"></div>
+
+          <div class="explanation-block">
+            <div class="card-label">Why the model called it this way</div>
+            <ul class="checklist" id="checklistItems"></ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="extras-grid">
+        <div class="extra-card">
+          <div class="card-label">Source credibility</div>
+          <div class="cred-source-name" id="credSourceName">No source given</div>
+          <div class="cred-score" id="credScoreText">—</div>
+          <span class="cred-badge unrated" id="credBadge">Unrated</span>
+        </div>
+
+        <div class="extra-card">
+          <div class="card-label">Bias detection</div>
+          <div class="bias-meter">
+            <div class="bm-top"><span class="bm-label">Political bias</span><span class="bm-value" id="biasPoliticalLabel">—</span></div>
+            <div class="bias-track"><div class="bias-fill" id="biasPoliticalFill"></div></div>
+          </div>
+          <div class="bias-meter">
+            <div class="bm-top"><span class="bm-label">Language bias</span><span class="bm-value" id="biasLanguageLabel">—</span></div>
+            <div class="bias-track"><div class="bias-fill" id="biasLanguageFill"></div></div>
+          </div>
+          <div class="bias-meter">
+            <div class="bm-top"><span class="bm-label">Emotional tone</span><span class="bm-value" id="biasEmotionLabel">—</span></div>
+            <div class="bias-track"><div class="bias-fill" id="biasEmotionFill"></div></div>
+          </div>
+        </div>
+
+        <div class="extra-card">
+          <div class="card-label">AI summary</div>
+          <p class="summary-text" id="summaryText">—</p>
+        </div>
+
+        <div class="extra-card">
+          <div class="card-label">Compare with verified reporting</div>
+          <div class="similar-list" id="similarList"></div>
+        </div>
+
+        <div class="extra-card wide">
+          <div class="card-label">Extracted claims</div>
+          <div id="claimsList"></div>
+        </div>
+
+        <div class="extra-card wide">
+          <div class="card-label">Community verification</div>
+          <div class="community-row">
+            <button class="btn-secondary btn-vote" id="agreeBtn">✓ Agree with verdict</button>
+            <button class="btn-secondary btn-vote" id="disagreeBtn">✕ Disagree</button>
+            <button class="btn-secondary btn-vote" id="reportBtn">⚑ Report wrong prediction</button>
+          </div>
+          <div class="community-note" id="communityNote"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dash-strip" id="dashStrip">
+      <div class="dash-head">
+        <div class="dash-head-left">
+          <h4>Desk analytics</h4>
+          <span class="dash-note" id="dashNote">Live SQLite Database History</span>
+        </div>
+        <button class="btn-clear-history" id="clearHistoryBtn" title="Clear stored predictions from database">✕ Clear desk history</button>
+      </div>
+      <div class="dash-grid">
+        <div class="dash-item">
+          <div class="d-num" id="dashTotal">0</div>
+          <div class="d-label">Total analyses</div>
+        </div>
+        <div class="dash-item">
+          <div class="d-num" id="dashRatioText">—</div>
+          <div class="d-label">Real vs fake</div>
+          <div class="dash-ratio"><div class="dash-ratio-real" id="dashRatioReal"></div><div class="dash-ratio-fake" id="dashRatioFake"></div></div>
+        </div>
+        <div class="dash-item">
+          <div class="d-num" id="dashAvgConf">—</div>
+          <div class="d-label">Avg. confidence</div>
+        </div>
+        <div class="dash-item">
+          <div class="d-label" style="margin-bottom:10px;">Top flagged keywords</div>
+          <div class="dash-keywords" id="dashKeywords"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="logo" style="font-size:1rem;">
+      <span class="logo-mark" style="width:20px;height:20px;">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="11" height="11">
+          <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.6"/>
+          <line x1="16.2" y1="16.2" x2="21" y2="21" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+      </span>
+      TruthLens
+    </div>
+    <div class="foot-note">Frontend demo — verdicts, credibility scores, and bias readings are generated locally for illustration, not by a trained model or a real publisher database.</div>
+  </div>
+</footer>
+
+<script src="script.js" defer></script>
+
+</body>
+</html>

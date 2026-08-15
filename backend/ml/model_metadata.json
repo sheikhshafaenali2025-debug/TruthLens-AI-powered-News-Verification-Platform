@@ -1,0 +1,10 @@
+{
+  "algorithm": "TF-IDF + Logistic Regression",
+  "training_date": "2026-08-15T12:30:22.959354+00:00",
+  "accuracy": 1.0,
+  "dataset_size": 30,
+  "classes": [
+    "FAKE",
+    "REAL"
+  ]
+}
