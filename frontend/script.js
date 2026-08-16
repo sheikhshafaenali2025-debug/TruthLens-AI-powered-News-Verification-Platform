@@ -31,9 +31,9 @@
     reader.readAsText(file);
   });
 
-  const API_BASE = (window.location.port === '5000' || window.location.origin.includes(':5000'))
-    ? window.location.origin
-    : 'http://localhost:5000';
+  const API_BASE = (['localhost', '127.0.0.1'].includes(window.location.hostname))
+    ? 'http://localhost:5000'
+    : 'https://truthlens-backend.onrender.com';
 
   async function callPredictAPI(text) {
     const response = await fetch(`${API_BASE}/api/predict`, {

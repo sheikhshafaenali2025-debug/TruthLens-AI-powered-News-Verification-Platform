@@ -7,3 +7,4 @@ pandas==2.2.2
 joblib==1.4.2
 nltk==3.8.1
 numpy==1.26.4
+gunicorn==22.0.0

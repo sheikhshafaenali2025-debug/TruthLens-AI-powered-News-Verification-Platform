@@ -13,7 +13,7 @@ it does not render or modify the frontend in any way.
 
 import os
 
-from flask import Flask, jsonify, send_from_directory
+from flask import Flask, jsonify
 from flask_cors import CORS
 
 from config import Config
@@ -26,8 +26,7 @@ from services.predictor import get_predictor
 
 def create_app() -> Flask:
     """Application factory: builds and configures the Flask app."""
-    frontend_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "frontend"))
-    app = Flask(__name__, static_folder=frontend_dir, static_url_path="")
+    app = Flask(__name__)
     cfg = Config()
 
     # Make both the raw Config object (for services that need file paths)
@@ -52,11 +51,6 @@ def create_app() -> Flask:
     app.register_blueprint(prediction_bp)
     app.register_blueprint(history_bp)
     app.register_blueprint(admin_bp)
-
-    # --- Frontend Root Route ---
-    @app.route("/")
-    def serve_frontend():
-        return send_from_directory(frontend_dir, "index.html")
 
     # --- Load (or lazily prepare to load) the ML model once at startup ---
     with app.app_context():
