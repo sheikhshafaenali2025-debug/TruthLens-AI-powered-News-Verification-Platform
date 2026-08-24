@@ -33,7 +33,7 @@
 
   const API_BASE = (['localhost', '127.0.0.1'].includes(window.location.hostname))
     ? 'http://localhost:5000'
-    : 'https://truthlens-backend.onrender.com';
+    : 'https://truthlens-ai-powered-news-verification.onrender.com';
 
   async function callPredictAPI(text) {
     const response = await fetch(`${API_BASE}/api/predict`, {
