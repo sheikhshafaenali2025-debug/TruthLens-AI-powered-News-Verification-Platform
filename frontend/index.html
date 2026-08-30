@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TruthLens — News Verification Desk</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -48,6 +48,7 @@
   </div>
 </header>
 
+<main>
 <section class="hero">
   <div class="hero-grid">
     <div>
@@ -153,7 +154,7 @@
     <div class="desk-grid">
       <div class="input-card">
         <div class="card-label"><span>Article text</span><span id="wordCount">0 words</span></div>
-        <textarea id="article-input" placeholder="Paste a news article here — the more complete, the better the reading..."></textarea>
+        <textarea id="article-input" aria-label="Article text to verify" placeholder="Paste a news article here — the more complete, the better the reading..."></textarea>
         <div class="source-row">
           <span class="src-icon">SOURCE</span>
           <input type="text" id="sourceInput" placeholder="e.g. bbc.com, reuters.com — leave blank if unknown">
@@ -167,7 +168,7 @@
         </div>
         <input type="file" id="fileInput" accept=".txt" style="display:none">
 
-        <div class="loading-panel" id="loadingPanel">
+        <div class="loading-panel" id="loadingPanel" role="status" aria-live="polite">
           <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
           <div class="loading-line" id="line1"><span class="dot"></span> Reading submitted text…</div>
           <div class="loading-line" id="line2"><span class="dot"></span> Extracting language features…</div>
@@ -189,7 +190,7 @@
       </div>
     </div>
 
-    <div class="results-panel" id="resultsPanel">
+    <div class="results-panel" id="resultsPanel" role="region" aria-live="polite" aria-label="Analysis report">
       <div class="results-head">
         <div>
           <div class="card-label">Case file — filed <span id="filedTime"></span></div>
@@ -326,6 +327,7 @@
     </div>
   </div>
 </section>
+</main>
 
 <footer>
   <div class="footer-inner">
